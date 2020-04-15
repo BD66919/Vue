@@ -1,0 +1,145 @@
+<meta charset="UTF-8" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<style>
+    .active{
+        border: 1px solid greenyellow;
+    }
+
+</style>
+
+
+<body>
+    <!--{{ message}}-->
+    <!--<div id="app" class="app">-->
+        <!--{{ message }}-->
+        <!--<br></br>-->
+        <!--<h2 v-text="content">{{ school.name }}</h2>-->
+        <!--<h2 v-html="content" ></h2>-->
+        <!--<h2>{{ school.mobile }}</h2>-->
+        <!--<h2>深圳{{ campus[0] }}</h2>-->
+        <!--&lt;!&ndash;插值表达式&ndash;&gt;-->
+        <!--<span>{{ message +"!"}}</span>-->
+        <!--<input type="button" value="事件绑定" @click="doIt">-->
+        <!--<h1 @click="change">123</h1>-->
+    <!--</div>-->
+
+    <!--<div class="input-num">-->
+        <!--<button @click="sub">-</button>-->
+        <!--<span>{{ num }}</span>-->
+        <!--<button @click="add">+</button>-->
+    <!--</div>-->
+
+    <div id="app2">
+        <!--<img v-show="isShow"  :src="imgSrc" :class="isActive?'active':''" @click="toggleActive">-->
+        <!--<button @click="changeIsShow">改变</button>-->
+        <!--<p v-if="isShow">你好</p>-->
+        <!--<br>-->
+        <img :src="imgArr[index]" alt="">
+        <a href="javascript:void(0)"  v-show="index!=0" @click="prev">上一张</a>
+        <a href="javascript:void(0)" v-show="index<imgArr.length-1" @click="next">下一张</a>
+        <ul>
+            <li v-for="(item,index) in arr">
+                {{ index+1 }}黑马程序员 {{item}}
+            </li>
+        </ul>
+        <input type="button" value="添加数据" @click="ad">
+        <input type="button" value="移除数据" @click="remove">
+        <h2 v-for="item in vegetables" v-bind:title="item.name">
+            {{item.name}}
+        </h2>
+        <input type="button" value="修改message" @click="setM">
+        <input type="text" v-model="message" @keyup.enter="getM">
+        <h2>{{message}}</h2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+    var app = new Vue({
+        el: '#app2',//挂载对象
+        data: {
+            arr:["北京","上海","深圳","广州"],
+            imgArr:[
+                "./images/1.png",
+                "./images/2.png",
+                "./images/3.png",
+                "./images/4.png"
+            ],
+            vegetables:[
+                { name:"西兰花炒蛋"},
+                { name:"蛋炒西兰花"}
+            ],
+            index :0,
+            message: '小黑 你好!',   //数据对象
+            school:{
+                name:"黑马程序员",
+                mobile:"400-618-9090"
+            },
+            content:"<a href = 'http://www.baidu.com'>黑马程序员</a>",
+            num :1,
+            campus:["北京","上海","广州","深圳"]
+        },
+        methods:{
+            prev:function(){
+                this.index--;
+                console.log(this.index);
+            },
+            next:function(){
+                this.index++;
+            },
+            getM:function () {
+                alert(this.message);
+            },
+            setM:function () {
+                this.message = "酷丁鱼";
+            },
+            doIt:function () {
+                alert("做IT");
+            },
+            change:function(){
+                this.message += "好好吃！";
+                console.log(this.food);
+            },
+            sub:function(){
+                if(this.num>0)
+                    this.num--;
+                else{
+                    alert('别点啦，最小了');
+                }
+            },
+            add:function(){
+                if(this.num<10)
+                    this.num++;
+                else{
+                    alert('别点啦，最大了');
+                }
+            },
+            ad:function(){
+                this.vegetables.push({name:"花菜炒蛋"});
+            },
+            remove:function(){
+                this.vegetables.shift();
+            }
+
+        }
+    })
+    </script>
+    <!--<script>-->
+        <!--var app = new Vue({-->
+            <!--el:"#app1",-->
+            <!--data:{-->
+                <!--isShow:false,-->
+                <!--imgSrc:"1.png",-->
+                <!--age:17,-->
+                <!--isActive:false-->
+            <!--},-->
+            <!--methods:{-->
+                <!--changeIsShow:function(){-->
+                    <!--this.isShow = !this.isShow;-->
+                <!--},-->
+                <!--toggleActive:function(){-->
+                    <!--this.isActive = !this.isActive;-->
+                <!--}-->
+            <!--}-->
+        <!--})-->
+    <!--</script>-->
+</body>
